@@ -1,0 +1,28 @@
+{% extends 'tareas/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <form action="/" method="POST" class="mb-4">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-primary">Crear Tarea</button>
+    </form>
+
+    {% for tarea in tareas %}
+    <div class="card mb-3">
+      <div class="card-body">
+        {% if tarea.completado %}
+        <h5 class="card-title"><strike>{{tarea.titulo}}</strike></h5>
+        {% else %}
+        <h5 class="card-title">{{tarea.titulo}}</h5>
+        {% endif %}
+        <p class="card-text">{{tarea.descripcion}}</p>
+        <a href="{% url 'editar_tarea' tarea.id %}" class="btn btn-secondary btn-sm">Editar</a>
+        <a href="{% url 'eliminar_tarea' tarea.id %}" class="btn btn-danger btn-sm">Borrar</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

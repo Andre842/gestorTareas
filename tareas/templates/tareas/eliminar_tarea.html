@@ -1,0 +1,15 @@
+{% extends 'tareas/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h3>Eliminar Tarea</h3>
+    <p>¿Estás seguro que quieres eliminar "{{tarea.titulo}}"?</p>
+    <p>{{tarea.descripcion}}</p>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Confirmar</button>
+      <a href="{% url 'listar_tarea' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
